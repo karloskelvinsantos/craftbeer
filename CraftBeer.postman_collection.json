@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "a81c57d2-bcca-4170-a660-19f3f408f1da",
+		"name": "CraftBeer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getBeer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/beers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBeers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBeer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Handmade Beer\",\n    \"ingredients\": \"Brewer's yeast, Malt, barley\",\n    \"alcoholContent\": \"10%\",\n    \"price\": 10.50,\n    \"category\": \"Handmade\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateBeer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Underground Beer\",\n    \"ingredients\": \"Malt\",\n    \"alcoholContent\": \"6,8%\",\n    \"price\": 9.0,\n    \"category\": \"Homemade\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patchBeer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test patch status ok\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test change propertie name Beer\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Homemade Beer\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"op\": \"replace\",\n        \"path\": \"/name\",\n        \"value\": \"Homemade Beer\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
